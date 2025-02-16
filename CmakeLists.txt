@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.5)
+project(thermal_camera)
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(cv_bridge REQUIRED)
+find_package(opencv4 REQUIRED)
+
+add_executable(thermal_camera_node src/thermal_camera_node.cpp)
+ament_target_dependencies(thermal_camera_node rclcpp sensor_msgs std_msgs cv_bridge opencv4)
+
+target_include_directories(thermal_camera_node PRIVATE
+  ${OpenCV_INCLUDE_DIRS}
+)
+
+target_link_libraries(thermal_camera_node
+  ${OpenCV_LIBRARIES}
+)
+
+install(TARGETS thermal_camera_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+ament_package()
