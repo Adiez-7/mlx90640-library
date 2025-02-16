@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>thermal_camera</name>
+  <version>0.1.0</version>
+  <description>ROS 2 package for MLX90640 thermal camera</description>
+  <maintainer email="user@example.com">User</maintainer>
+  <license>Apache-2.0</license>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>OpenCV</depend>
+  <depend>i2c-dev</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
