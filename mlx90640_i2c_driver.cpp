@@ -66,7 +66,16 @@ int MLX90640_I2CWrite(uint8_t slaveAddr, uint16_t writeAddress, uint16_t data) {
 }
 
 void MLX90640_I2CFreqSet(int freq) {
-    // Not implemented, could use ioctl to adjust I2C speed if necessary
+    if (i2c_fd < 0) {
+        std::cerr << "I2C device not initialized." << std::endl;
+        return;
+    }
+    
+    if (ioctl(i2c_fd, I2C_SPEED, freq) < 0) {
+        std::cerr << "Failed to set I2C speed: " << strerror(errno) << std::endl;
+    } else {
+        std::cout << "I2C speed set to " << freq << " Hz" << std::endl;
+    }
 }
 
 int MLX90640_I2CErrno() {
